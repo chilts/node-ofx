@@ -1,0 +1,47 @@
+{
+    "name": "ofx",
+    "description": "Parse OFX files into a usable data structure.",
+    "version": "0.1.0",
+    "author": {
+        "name":"Andrew Chilton",
+        "email":"chilts@appsattic.com",
+        "url":"http://www.chilts.org/"
+    },
+    "homepage": "https://github.com/appsattic/ofx",
+    "contributors": [
+        {
+            "name":"Christian Sullivan",
+            "url":"http://euforic.co/"
+        }
+    ],
+    "devDependencies": {
+        "tap": ">= 0.2.5",
+        "optimist": "0.3.x"
+    },
+    "dependencies": {
+        "xml2json": "0.3.x"
+    },
+    "main": "./ofx.js",
+    "directories":  {},
+    "engines": {
+        "node": ">= 0.6.0"
+    },
+    "repository": {
+        "type" : "git",
+        "url": "git://github.com/appsattic/ofx.git"
+    },
+   "bugs" : {
+        "url" : "http://github.com/appsattic/ofx/issues",
+        "mail" : "chilts@appsattic.com"
+    },
+    "licenses": [{
+        "type": "MIT",
+        "url": "http://github.com/appsattic/ofx/raw/master/LICENSE"
+    }],
+    "keywords": [
+        "ofx", "open financial exchange bank banking export"
+    ],
+    "scripts" : {
+        "test" : "tap test/*.js"
+    }
+}
