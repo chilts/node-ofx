@@ -15,10 +15,10 @@ Parse Open Financial Exchange (OFX) files into a usable data structure.
 # OFX Files #
 
 This file format is yucky, horrible and just silly. This module helps parse the ones I know about. And it doesn't do it
-in a nice way either. It may or may not work for your own use - only by trying it will you find it. And good luck
+in a nice way either. It may or may not work for your own use - only by trying it will you find out. And good luck
 trying.
 
-But other than that ... please do try it and let me know how it goes. Only by trying a large selection of different
+But other than that ... please do try it and let me know how it goes. Only by parsing a large selection of different
 financial institutions OFX variations can we be sure that this module does what is expected (and not necessarily to the
 letter of the law of the file format).
 
@@ -59,6 +59,12 @@ This module takes the OFX format and does the following:
 It isn't very nice but it seems to work. Seriously, you shouldn't use this module! Unless you really need it and if you
 do, please let me know if it doesn't work and send me an example of the format which doesn't. I'll add a test and we
 can carry on all happy about the world. Thanks. :)
+
+# Credits #
+
+Thanks to [Christian Sullivan](https://github.com/euforic) for writing
+[banking.js](https://github.com/euforic/banking.js), upon which some of this code is based. Many thanks for letting me
+use it.
 
 # Author #
 
