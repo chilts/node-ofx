@@ -19,6 +19,7 @@ function parse(data) {
     var headerString = ofx[0].split(/\r?\n/);
     var header = {};
     headerString.forEach(function(line, i) {
+        var m;
         if ( m = line.match(/^(\w+):(.+)$/) ) {
             header[m[1]] = m[2];
         }
