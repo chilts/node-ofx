@@ -11,18 +11,15 @@ test('parse', function (t) {
     var data = ofx.parse(file);
 
     // headers
-    t.equal(data.header.OFXHEADER, '100', 'ofxheader');
-    t.equal(data.header.ENCODING, 'USASCII', 'encoding');
+    t.equal(data.header.OFXHEADER, '100');
+    t.equal(data.header.ENCODING, 'USASCII');
 
-    // meta
-    t.equal(data.meta.accountId, '1234567-00', 'account id');
-    t.equal(data.meta.bankId, '1', 'bank id');
-    t.equal(data.meta.branchId, '123', 'branch id');
-    t.equal(data.meta.accountType, 'SAVINGS', 'account type');
+    var transactions = data.OFX.BANKMSGSRSV1.STMTTRNRS.STMTRS.BANKTRANLIST.STMTTRN;
+    t.equal(transactions.length, 5);
 
-    // transactions
-    t.equal(typeof data.transactions, 'object', 'transactions loaded');
-    t.equal(data.transactions.length, 5, 'five transactions');
+    var status = data.OFX.SIGNONMSGSRSV1.SONRS.STATUS;
+    t.equal(status.CODE, '0');
+    t.equal(status.SEVERITY, 'INFO');
 
     t.end();
 });
