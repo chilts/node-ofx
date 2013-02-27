@@ -27,3 +27,14 @@ test('parse', function (t) {
     t.end();
 });
 
+// parse <-> serialize
+test('serialize', function(t) {
+    var expected = fs.readFileSync(__dirname + '/data/example1.ofx', 'utf8');
+    var data = ofx.parse(expected);
+
+    var actual = ofx.serialize(data.header, data.OFX);
+    t.equal(actual, expected);
+    t.deepEqual(ofx.parse(actual), data);
+
+    t.end();
+});
