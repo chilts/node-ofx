@@ -19,7 +19,7 @@
         "optimist": "~0.3.x"
     },
     "dependencies": {
-        "xml2json": "0.3.x"
+        "xml2json": "0.3.2"
     },
     "main": "./ofx.js",
     "directories":  {},
