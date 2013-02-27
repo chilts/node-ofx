@@ -1,6 +1,3 @@
-var _ = require('underscore');
-var util = require('util');
-
 var xml2json = require('xml2json');
 
 function parse(data) {
