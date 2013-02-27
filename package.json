@@ -15,8 +15,8 @@
         }
     ],
     "devDependencies": {
-        "tap": ">= 0.2.5",
-        "optimist": "0.3.x"
+        "tap": "~0.4.0",
+        "optimist": "~0.3.x"
     },
     "dependencies": {
         "xml2json": "0.3.x",

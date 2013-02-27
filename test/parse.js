@@ -1,32 +1,14 @@
-// --------------------------------------------------------------------------------------------------------------------
-//
-// parse.js - test for the ofx parsing
-//
-// Copyright (c) 2012 AppsAttic Ltd - http://www.appsattic.com/
-// Written by Andrew Chilton <chilts@appsattic.com>
-//
-// License: http://opensource.org/licenses/MIT
-//
-// --------------------------------------------------------------------------------------------------------------------
-
-// --------------------------------------------------------------------------------------------------------------------
-// requires
-
 var fs = require('fs');
-var tap = require("tap");
+var tap = require('tap');
 
 var ofx = require('..');
 
 var test = tap.test;
 var plan = tap.plan;
 
-// --------------------------------------------------------------------------------------------------------------------
-// basic tests
-
-test("load file", function (t) {
-    var file = fs.readFileSync('data/example1.ofx', 'utf8');
+test('parse', function (t) {
+    var file = fs.readFileSync(__dirname + '/../data/example1.ofx', 'utf8');
     var data = ofx.parse(file);
-    console.log(data);
 
     // headers
     t.equal(data.header.OFXHEADER, '100', 'ofxheader');
@@ -45,4 +27,3 @@ test("load file", function (t) {
     t.end();
 });
 
-// --------------------------------------------------------------------------------------------------------------------
