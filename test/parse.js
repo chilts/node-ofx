@@ -7,7 +7,7 @@ var test = tap.test;
 var plan = tap.plan;
 
 test('parse', function (t) {
-    var file = fs.readFileSync(__dirname + '/../data/example1.ofx', 'utf8');
+    var file = fs.readFileSync(__dirname + '/data/example1.ofx', 'utf8');
     var data = ofx.parse(file);
 
     // headers
