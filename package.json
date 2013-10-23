@@ -39,7 +39,7 @@
         "url": "http://github.com/appsattic/ofx/raw/master/LICENSE"
     }],
     "keywords": [
-        "ofx", "open financial exchange bank banking export"
+        "ofx", "open financial exchange", "bank", "banking", "export"
     ],
     "scripts" : {
         "test" : "tap test/*.js"
