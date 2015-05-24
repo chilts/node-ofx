@@ -34,10 +34,7 @@
         "url" : "http://github.com/appsattic/ofx/issues",
         "mail" : "chilts@appsattic.com"
     },
-    "licenses": [{
-        "type": "MIT",
-        "url": "http://github.com/appsattic/ofx/raw/master/LICENSE"
-    }],
+    "license": "MIT",
     "keywords": [
         "ofx", "open financial exchange", "bank", "banking", "export"
     ],
