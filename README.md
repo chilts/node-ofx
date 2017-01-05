@@ -91,8 +91,7 @@ use it.
 
 # Author #
 
-Written by [Andrew Chilton](http://chilts.org/) - [Blog](http://chilts.org/blog/) -
-[Twitter](https://twitter.com/andychilton).
+Written by [Andrew Chilton](https://chilts.org/) - [@andychilton](https://twitter.com/andychilton).
 
 # License #
 
