@@ -1,5 +1,18 @@
 var xml2json = require('xml2json');
 
+function sgml2Xml(sgml) {
+    return sgml
+        .replace(/>\s+</g, '><')    // remove whitespace inbetween tag close/open
+        .replace(/\s+</g, '<')      // remove whitespace before a close tag
+        .replace(/>\s+/g, '>')      // remove whitespace after a close tag
+        .replace(/<([A-Z0-9_]*)+\.+([A-Z0-9_]*)>([^<]+)/g, '<\$1\$2>\$3' )
+        .replace(/<(\w+?)>([^<]+)/g, '<\$1>\$2</\$1>');
+}
+
+function parseXml(content) {
+    return JSON.parse(xml2json.toJson(content, { coerce: false }))
+}
+
 function parse(data) {
     // firstly, split into the header attributes and the footer sgml
     var ofx = data.split('<OFX>', 2);
@@ -13,16 +26,16 @@ function parse(data) {
     });
 
     // make the SGML and the XML
-    var sgml = '<OFX>' + ofx[1];
-    var xml = sgml
-        .replace(/>\s+</g, '><')
-        .replace(/\s+</g, '<')
-        .replace(/>\s+/g, '>')
-        .replace(/<([A-Z0-9_]*)+\.+([A-Z0-9_]*)>([^<]+)/g, '<\$1\$2>\$3' )
-        .replace(/<(\w+?)>([^<]+)/g, '<\$1>\$2</\$1>');
+    var content = '<OFX>' + ofx[1];
 
-    // parse the XML
-    var data = JSON.parse(xml2json.toJson(xml, { coerce: false }));
+    // Parse the XML/SGML portion of the file into an object
+    // Try as XML first, and if that fails do the SGML->XML mangling
+    var data = null;
+    try {
+        data = parseXml(content);
+    } catch (e) {
+        data = parseXml(sgml2Xml(content));
+    }
 
     // put the headers into the returned data
     data.header = header;
