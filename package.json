@@ -12,6 +12,10 @@
     {
       "name": "Christian Sullivan",
       "url": "http://euforic.co/"
+    },
+    {
+      "name": "Eric Webb",
+      "url": "https://webb.codes"
     }
   ],
   "devDependencies": {
