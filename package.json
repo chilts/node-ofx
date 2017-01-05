@@ -4,10 +4,10 @@
   "version": "0.3.0",
   "author": {
     "name": "Andrew Chilton",
-    "email": "chilts@appsattic.com",
-    "url": "http://www.chilts.org/"
+    "email": "andychilton@gmail.com",
+    "url": "https://chilts.org/"
   },
-  "homepage": "https://github.com/appsattic/ofx",
+  "homepage": "https://github.com/chilts/node-ofx",
   "contributors": [
     {
       "name": "Christian Sullivan",
@@ -28,10 +28,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/appsattic/ofx.git"
+    "url": "git://github.com/chilts/node-ofx.git"
   },
   "bugs": {
-    "url": "http://github.com/appsattic/ofx/issues",
+    "url": "http://github.com/chilts/node-ofx/issues",
     "mail": "chilts@appsattic.com"
   },
   "license": "MIT",
