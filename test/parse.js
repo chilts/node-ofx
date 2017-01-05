@@ -1,10 +1,9 @@
+// core
 var fs = require('fs');
-var tap = require('tap');
+var test = require('tape');
 
+// local
 var ofx = require('..');
-
-var test = tap.test;
-var plan = tap.plan;
 
 test('parse', function (t) {
     var file = fs.readFileSync(__dirname + '/data/example1.ofx', 'utf8');

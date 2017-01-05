@@ -19,8 +19,7 @@
     }
   ],
   "devDependencies": {
-    "optimist": "^0.6.1",
-    "tap": "^8.0.1"
+    "tape": "^4.6.3"
   },
   "dependencies": {
     "xml2json": "^0.10.0"
@@ -47,6 +46,6 @@
     "export"
   ],
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tape test/*.js"
   }
 }
