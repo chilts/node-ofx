@@ -15,42 +15,42 @@ function parseXml(content) {
 
 function parse(data) {
     // firstly, split into the header attributes and the footer sgml
-    var ofx = data.split('<OFX>', 2);
+    const ofx = data.split('<OFX>', 2);
 
     // firstly, parse the headers
-    var headerString = ofx[0].split(/\r?\n/);
-    var header = {};
-    headerString.forEach(function(attrs) {
-        var headAttr = attrs.split(/:/,2);
+    const headerString = ofx[0].split(/\r?\n/);
+    const header = {};
+    headerString.forEach((attrs) => {
+        const headAttr = attrs.split(/:/,2);
         header[headAttr[0]] = headAttr[1];
     });
 
     // make the SGML and the XML
-    var content = '<OFX>' + ofx[1];
+    const content = `<OFX>${ofx[1]}`;
 
     // Parse the XML/SGML portion of the file into an object
     // Try as XML first, and if that fails do the SGML->XML mangling
-    var data = null;
+    let dataParsed = null;
     try {
-        data = parseXml(content);
+      dataParsed = parseXml(content);
     } catch (e) {
-        data = parseXml(sgml2Xml(content));
+      dataParsed = parseXml(sgml2Xml(content));
     }
 
     // put the headers into the returned data
-    data.header = header;
+    dataParsed.header = header;
 
-    return data;
+    return dataParsed;
 }
 
 function serialize(header, body) {
-    var out = '';
+    let out = '';
     // header order could matter
-    var headers = ['OFXHEADER', 'DATA', 'VERSION', 'SECURITY', 'ENCODING', 'CHARSET',
+    const headers = ['OFXHEADER', 'DATA', 'VERSION', 'SECURITY', 'ENCODING', 'CHARSET',
         'COMPRESSION', 'OLDFILEUID', 'NEWFILEUID'];
 
-    headers.forEach(function(name) {
-        out += name + ':' + header[name] + '\n';
+    headers.forEach((name) => {
+        out += `${name}:${header[name]}\n`;
     });
     out += '\n';
 
@@ -58,22 +58,22 @@ function serialize(header, body) {
     return out;
 }
 
-var objToOfx = function(obj) {
-  var out = '';
+const objToOfx = (obj) => {
+  let out = '';
 
-  Object.keys(obj).forEach(function(name) {
-    var item = obj[name];
-    var start = '<' + name + '>';
-    var end = '</' + name + '>';
+  Object.keys(obj).forEach((name) => {
+    const item = obj[name];
+    const start = `<${name}>`;
+    const end = `</${name}>`;
 
     if (item instanceof Object) {
         if (item instanceof Array) {
-            item.forEach(function(it) {
-                out += start + '\n' + objToOfx(it) + end + '\n';
+            item.forEach((it) => {
+                out += `${start}\n${objToOfx(it)}${end}\n`;
             });
             return;
         }
-        return out += start + '\n' + objToOfx(item) + end + '\n';
+        return out += `${start}\n${objToOfx(item)}${end}\n`
     }
     out += start + item + '\n';
   });
@@ -81,5 +81,7 @@ var objToOfx = function(obj) {
   return out;
 }
 
-module.exports.parse = parse;
-module.exports.serialize = serialize;
+module.exports = {
+  parse,
+  serialize
+}
