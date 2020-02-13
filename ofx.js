@@ -1,4 +1,4 @@
-var xml2json = require('xml2json');
+const xml2json = require('xml2json');
 
 function sgml2Xml(sgml) {
     return sgml
