@@ -1,36 +1,32 @@
-```
- _______  _______          
-(  ___  )(  ____ \|\     /|
-| (   ) || (    \/( \   / )
-| |   | || (__     \ (_) / 
-| |   | ||  __)     ) _ (  
-| |   | || (       / ( ) \ 
-| (___) || )      ( /   \ )
-(_______)|/       |/     \|
-                           
-```
+# OFX #
 
 Parse Open Financial Exchange (OFX) files into a usable data structure. Serialize objects into OFX file format.
 
-# parsing #
+## Install ##
+
+```
+$ npm install ofx
+```
+
+## Parsing ##
 
 ```js
-var ofx = require('ofx');
+const ofx = require('ofx');
 
 fs.readFile('Account-1234-5678.ofx', 'utf8', function(err, ofxData) {
     if (err) throw err;
 
-    var data = ofx.parse(ofxData);
+    const data = ofx.parse(ofxData);
     console.dir(data);
 });
 ```
 
-# serializing #
+## Serializing ##
 
 ```js
-var ofx = require('ofx');
+const ofx = require('ofx');
 
-var header = {
+const header = {
     OFXHEADER: '100',
     DATA: 'OFXSGML',
     VERSION: '103',
@@ -42,7 +38,7 @@ var header = {
     NEWFILEUID: 'unique id here'
 };
 
-var body = {
+const body = {
     SIGNONMSGSRQV1: {
       SONRQ: {
         DTCLIENT: 'value',
@@ -60,20 +56,22 @@ var body = {
     }
 };
 
-var ofx_string = ofx.serialize(header, body);
+const ofx_string = ofx.serialize(header, body);
 console.log(ofx_string);
 ```
 
-# Data #
+## Data ##
 
 In your data returned, you will have the following properties:
 
 * OFX - a dump of the XML parsing as a js object
 * header - just the 'key:values' pairs from the top of the OFX file
 
-# caveats #
+## caveats ##
 
-This file format is yucky, horrible and just silly. This module helps parse the ones I know about. And it doesn't do it in a nice way either. It may or may not work for your own use - only by trying it will you find out.
+The OFX file format is yucky, horrible and just silly. This module helps parse
+the ones I know about. And it doesn't do it in a nice way either. It may or may
+not work for your own use - only by trying it will you find out.
 
 If you discover a broken file, please submit an issue with the sample file.
 
@@ -83,16 +81,45 @@ This module takes the OFX format and does the following:
 * tries to mechnically turn the SGML into a valid XML format
 * turns the XML into a JavaScript data structure
 
-# Credits #
+## Credits ##
 
 Thanks to [Christian Sullivan](https://github.com/euforic) for writing
 [banking.js](https://github.com/euforic/banking.js), upon which some of this code is based. Many thanks for letting me
 use it.
 
-# Author #
+## Author ##
 
-Written by [Andrew Chilton](https://chilts.org/) - [@andychilton](https://twitter.com/andychilton).
+```
+$ npx chilts
 
-# License #
+   ╒════════════════════════════════════════════════════╕
+   │                                                    │
+   │   Andrew Chilton (Personal)                        │
+   │   -------------------------                        │
+   │                                                    │
+   │          Email : andychilton@gmail.com             │
+   │            Web : https://chilts.org                │
+   │        Twitter : https://twitter.com/andychilton   │
+   │         GitHub : https://github.com/chilts         │
+   │         GitLab : https://gitlab.org/chilts         │
+   │                                                    │
+   │   Apps Attic Ltd (My Company)                      │
+   │   ---------------------------                      │
+   │                                                    │
+   │          Email : chilts@appsattic.com              │
+   │            Web : https://appsattic.com             │
+   │        Twitter : https://twitter.com/AppsAttic     │
+   │         GitLab : https://gitlab.com/appsattic      │
+   │                                                    │
+   │   Node.js / npm                                    │
+   │   -------------                                    │
+   │                                                    │
+   │        Profile : https://www.npmjs.com/~chilts     │
+   │           Card : $ npx chilts                      │
+   │                                                    │
+   ╘════════════════════════════════════════════════════╛
+```
+
+## License ##
 
 The MIT License : http://appsattic.mit-license.org/2012/
