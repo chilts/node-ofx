@@ -77,11 +77,11 @@ const objToOfx = (obj, options) => {
     }
 
     if (!(item instanceof Array)) {
-      return out += `${start}\n${objToOfx(item)}${end}\n`
+      return out += `${start}\n${objToOfx(item, options)}${end}\n`
     }
 
     item.forEach((it) => {
-        out += `${start}\n${objToOfx(it)}${end}\n`;
+        out += `${start}\n${objToOfx(it, options)}${end}\n`;
     });
   });
 
