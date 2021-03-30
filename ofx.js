@@ -30,7 +30,7 @@ function parse(data) {
 
     // Parse the XML/SGML portion of the file into an object
     // Try as XML first, and if that fails do the SGML->XML mangling
-    let dataParsed = null;
+    let dataParsed;
     try {
       dataParsed = parseXml(content);
     } catch (e) {
@@ -43,7 +43,12 @@ function parse(data) {
     return dataParsed;
 }
 
-function serialize(header, body) {
+const DEFAULT_OPTIONS = {
+  closeTags: false
+}
+
+function serialize(header, body, options = {}) {
+    const normalizedOptions = {...DEFAULT_OPTIONS, ...options};
     let out = '';
     // header order could matter
     const headers = ['OFXHEADER', 'DATA', 'VERSION', 'SECURITY', 'ENCODING', 'CHARSET',
@@ -54,11 +59,11 @@ function serialize(header, body) {
     });
     out += '\n';
 
-    out += objToOfx({ OFX: body });
+    out += objToOfx({ OFX: body }, normalizedOptions);
     return out;
 }
 
-const objToOfx = (obj) => {
+const objToOfx = (obj, options) => {
   let out = '';
 
   Object.keys(obj).forEach((name) => {
@@ -66,16 +71,18 @@ const objToOfx = (obj) => {
     const start = `<${name}>`;
     const end = `</${name}>`;
 
-    if (item instanceof Object) {
-        if (item instanceof Array) {
-            item.forEach((it) => {
-                out += `${start}\n${objToOfx(it)}${end}\n`;
-            });
-            return;
-        }
-        return out += `${start}\n${objToOfx(item)}${end}\n`
+    if (!(item instanceof Object)) {
+      out += `${start}${item}${options.closeTags ? end : ''}\n`;
+      return;
     }
-    out += start + item + '\n';
+
+    if (!(item instanceof Array)) {
+      return out += `${start}\n${objToOfx(item)}${end}\n`
+    }
+
+    item.forEach((it) => {
+        out += `${start}\n${objToOfx(it)}${end}\n`;
+    });
   });
 
   return out;

@@ -56,8 +56,50 @@ const body = {
     }
 };
 
-const ofx_string = ofx.serialize(header, body);
+// By default, the serializer won't close the end node tags. To change that, pass { closeTags: true } as an option.
+
+const options = {closeTags: true};
+const ofx_string = ofx.serialize(header, body, options);
 console.log(ofx_string);
+
+```
+
+Sample result with default `options`:
+
+```xml
+    <SIGNONMSGSRSV1>
+        <SONRS>
+            <STATUS>
+                <CODE>0
+                <SEVERITY>INFO
+            </STATUS>
+            <DTSERVER>20210330
+            <LANGUAGE>POR
+            <FI>
+                <ORG>Some Bank Institution
+                <FID>012
+            </FI>
+        </SONRS>
+    </SIGNONMSGSRSV1>
+```
+
+Sample result with `options = {closeTags: true}`:
+
+```xml
+    <SIGNONMSGSRSV1>
+        <SONRS>
+            <STATUS>
+                <CODE>0</CODE>
+                <SEVERITY>INFO</SEVERITY>
+            </STATUS>
+            <DTSERVER>20210330</DTSERVER>
+            <LANGUAGE>POR</LANGUAGE>
+            <FI>
+                <ORG>Some Bank Institution</ORG>
+                <FID>012</FID>
+            </FI>
+        </SONRS>
+    </SIGNONMSGSRSV1>
 ```
 
 ## Data ##
