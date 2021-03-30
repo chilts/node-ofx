@@ -18,7 +18,7 @@ function parse(data) {
     const ofx = data.split('<OFX>', 2);
 
     // firstly, parse the headers
-    const headerString = ofx[0].split(/\r?\n/);
+    const headerString = ofx[0].split(/\r|\n|\r\n/);
     const header = {};
     headerString.forEach((attrs) => {
         const headAttr = attrs.split(/:/,2);
